@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -48,6 +49,13 @@ namespace SQLiteDBAccess
     public int AddColumn(string tableName, KeyValuePair<string, string> addingColumn)
     {
       var sql = SQLGen.AddColumn(tableName, addingColumn);
+      return ExecuteNonQuery(sql);
+    }
+
+    public int InsertRows(string tableName, List<string> cols, List<List<object>> rows)
+    {
+      if (!rows.Any()) return 0;
+      var sql = SQLGen.Insert(tableName, cols, rows);
       return ExecuteNonQuery(sql);
     }
     #endregion

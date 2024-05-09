@@ -1,6 +1,8 @@
 ﻿using SQLiteDBAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
 
 namespace AddTableAndColumns
 {
@@ -28,12 +30,20 @@ namespace AddTableAndColumns
         { "Address", "TEXT" },
       };
 
+      var insertingRows = new List<List<object>>
+      {
+        new List<object> { "Yamada", "Hamamatsu" },
+        new List<object> { "Suzuki", "Tokyo" }
+      };
+
+
       using (var db = new SamepleDB(_dbFilePath))
       {
         var tableList = db.SelectTableList();
         if (!tableList.Contains(addingTableName))
         {
           db.CreateTable(addingTableName, columnList);
+          var affected = db.InsertRows(addingTableName, columnList.Keys.ToList(), insertingRows);
         }
         else
         {

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace SQLiteDBAccess
 {
@@ -34,6 +36,33 @@ namespace SQLiteDBAccess
     internal static string AddColumn(string tableName, KeyValuePair<string, string> addingColumn)
     {
       return $"alter table {tableName} add column \"{addingColumn.Key}\" {addingColumn.Value};" ;
+    }
+
+    internal static string Insert(string tableName, List<string> cols, List<List<object>> rows)
+    {
+      var sql = new StringBuilder();
+      sql.Append($"insert into {tableName} ");
+      sql.Append("(");
+      foreach (var col in cols)
+      {
+        sql.Append($"{col},");
+      }
+      sql.Remove(sql.Length - 1, 1);
+      sql.Append($") values ");
+
+      foreach (var row in rows)
+      {
+        sql.Append($"(");
+        foreach (var val in row)
+        {
+          sql.Append($"'{val}',");
+        }
+        sql.Remove(sql.Length - 1, 1);
+        sql.Append($"),");
+      }
+      sql.Remove(sql.Length - 1, 1);
+      sql.Append($";");
+      return sql.ToString();
     }
   }
 }
