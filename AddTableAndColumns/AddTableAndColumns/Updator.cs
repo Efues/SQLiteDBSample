@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 
 namespace AddTableAndColumns
 {
@@ -36,7 +35,6 @@ namespace AddTableAndColumns
         new List<object> { "Suzuki", "Tokyo" }
       };
 
-
       using (var db = new SamepleDB(_dbFilePath))
       {
         var tableList = db.SelectTableList();
@@ -66,6 +64,7 @@ namespace AddTableAndColumns
     {
       var targetTableName = "Products";
       var addingColumn = new KeyValuePair<string, string>("Stock", "INTEGER");
+      var defaultValue = 0;
 
       using (var db = new SamepleDB(_dbFilePath))
       {
@@ -73,6 +72,7 @@ namespace AddTableAndColumns
         if (!columnList.Contains(addingColumn.Key))
         {
           db.AddColumn(targetTableName, addingColumn);
+          var affected = db.UpdateRows(targetTableName, addingColumn.Key, defaultValue);
         }
         else
         {

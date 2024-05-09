@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 
 namespace SQLiteDBAccess
 {
@@ -63,6 +61,11 @@ namespace SQLiteDBAccess
       sql.Remove(sql.Length - 1, 1);
       sql.Append($";");
       return sql.ToString();
+    }
+
+    internal static string Update(string tableName, string col, int defaultValue)
+    {
+      return $"update {tableName} set {col} = {defaultValue};";
     }
   }
 }
