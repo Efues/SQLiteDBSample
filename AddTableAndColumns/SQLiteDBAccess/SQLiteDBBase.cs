@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Data.SQLite;
-using System.Reflection;
 using System.Data.Linq;
 using System.IO;
-using System.Data.Common;
 using System.Data;
-using System.Runtime.Remoting.Messaging;
-using System.Data.Linq.Mapping;
 
 namespace SQLiteDBAccess
 {
@@ -17,7 +13,6 @@ namespace SQLiteDBAccess
     protected readonly DataContext _dataContext;
 
     protected DataContext DataContext { get { return _dataContext; } }
-
 
     public SQLiteDBBase(string DBFilePath)
     {
