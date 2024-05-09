@@ -78,7 +78,6 @@
     <Compile Include="SQLiteDBBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SamepleDB.cs" />
-    <Compile Include="Updator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

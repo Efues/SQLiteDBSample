@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SQLiteDBAccess;
+using System;
 using System.Collections.Generic;
 
-namespace SQLiteDBAccess
+namespace AddTableAndColumns
 {
-  public class Updator
+  internal class Updator
   {
     private string _dbFilePath;
 
